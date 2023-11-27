@@ -1,6 +1,7 @@
 # PDF Word Counter
-Enumerates words from a PDF file by quantity order
+Enumerates words from all PDF files in "pdfs_folder" by quantity order.
 
 
-![word_counter](https://github.com/g-brrzzn/pdf_word_counter/assets/136928835/9678613e-e878-440d-ac83-bcb7bdae325f)
-![word_counter2](https://github.com/g-brrzzn/pdf_word_counter/assets/136928835/38084f46-88a4-46b0-ae2f-58534a9e684e)
+![screenshot2](https://github.com/g-brrzzn/pdf_word_counter/assets/136928835/c72b9ca4-402f-480a-85f7-e1c7c85bb890)
+![screenshot1](https://github.com/g-brrzzn/pdf_word_counter/assets/136928835/fe1168ec-e9d0-463e-ac3a-42fa04bc5326)
+
