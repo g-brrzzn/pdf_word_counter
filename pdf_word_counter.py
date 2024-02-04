@@ -55,7 +55,7 @@ def pdf_word_counter():
             pdf_to_txt(f'pdfs_folder/{filename}')
             try:    txt = open(f'pdfs_folder/{filename[:-4]}.txt', 'r', encoding='cp1252').read()
             except: txt = open(f'pdfs_folder/{filename[:-4]}.txt', 'r', encoding='utf-8').read()
-        combined_txt += txt
+            combined_txt += txt
 
     combined_txt = remove_stopwords(combined_txt)
     words_dict = word_count(combined_txt)
@@ -84,6 +84,7 @@ def create_scatter_plot(data, title):
 
 
 print('\nLoading...')
+print('Don\'t panic.')
 enumerated_words = pdf_word_counter()
 print(enumerated_words)
 

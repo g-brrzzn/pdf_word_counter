@@ -15,10 +15,8 @@ $ cd pdf_word_counter
 
 # install the requirements
 $ python -m pip install -r requirements.txt
-# or
-$ pip install -r requirements.txt
 
-# Place the PDF files you want into the 'pdfs_folder' directory
+# Place the PDF files you want into the "pdfs_folder" directory
 
 # run the pdf_word_counter.py
 $ python pdf_word_counter.py
