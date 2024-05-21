@@ -34,7 +34,7 @@ def pdf_to_txt(pdf):
 
 def word_count(txt):
     words_dict = dict()
-    filter = [',', '.', '-', '\'', '\"', '~', '_', '—', '“', '”', '!', '?', '’', ':', ';', '\'\'', '``', '`', ' t ', ' s ', ' o ', ')', '(', '...', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '[', ']']
+    filter = [',', '.', '-', '\'', '\"', '~', '_', '—', '“', '”', '!', '?', '’', ':', ';', '\'\'', '``', '`', '*', ' t ', ' s ', ' o ', ')', '(', '...', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '[', ']']
     for i in range(len(filter)):
         txt = txt.replace(filter[i], ' ')
     txt = txt.lower()
@@ -59,7 +59,7 @@ def pdf_word_counter():
 
     combined_txt = remove_stopwords(combined_txt)
     words_dict = word_count(combined_txt)
-    enumerated_words = (dict(sorted(words_dict.items(), key=lambda item: item[1])))
+    enumerated_words = (dict(sorted(words_dict.items(), key=lambda item: item[1], reverse=True)))
 
     print(f'Elapsed time: {time.time() - time1:.2f}s')
     return enumerated_words
@@ -70,11 +70,15 @@ def clean_txt_files():
         if filename.endswith('.pdf'):
             if os.path.exists(f'pdfs_folder/{filename[:-4]}.txt'):
                 os.remove(f'pdfs_folder/{filename[:-4]}.txt')
+                
+def export_to_excel(dataframe, filename):
+    if not os.path.exists('EXCEL_EXPORT_FOLDER/'): os.makedirs('EXCEL_EXPORT_FOLDER/')
+    dataframe.to_excel(f'EXCEL_EXPORT_FOLDER/{filename}', index=False)
 
 
 def create_scatter_plot(data, title):
     plt.figure(figsize=(17, 6))
-    plt.plot(range(len(data)), data['Frequency'], marker='o', linestyle='-', markersize=6, label='Frequency')
+    plt.plot(range(len(data)), data['Frequency'], marker='o', linestyle=':', markersize=6, label='Frequency')
     plt.xticks(range(len(data)), data['Words'], rotation=90)
     plt.title(title)
     plt.xlabel('Words')
@@ -86,15 +90,17 @@ def create_scatter_plot(data, title):
 print('\nLoading...')
 print('Don\'t panic.')
 enumerated_words = pdf_word_counter()
-print(enumerated_words)
+
+top_n = 100
+print(list(enumerated_words.items())[:top_n])
 
 word_counts_df = pd.DataFrame(enumerated_words.items(), columns=['Words', 'Frequency'])
 plt.style.use('https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle')
 word_counts_df = word_counts_df.sort_values(by='Frequency', ascending=False)
 
-top_n = 100
 top_words_df = word_counts_df.head(top_n)
 
+export_to_excel(word_counts_df, 'word_counts.xlsx')
 
 create_scatter_plot(top_words_df, f'Top {1}-{top_n} Words')
 clean_txt_files()
