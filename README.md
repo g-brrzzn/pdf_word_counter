@@ -1,5 +1,5 @@
 # PDF Word Counter
-Enumerates words from all PDF files in "pdfs_folder" by quantity order.
+Enumerate the words from all PDF files in the 'pdfs_folder' by quantity order and export to an Excel file.
 
 
 ![screenshot2](https://github.com/g-brrzzn/pdf_word_counter/assets/136928835/c72b9ca4-402f-480a-85f7-e1c7c85bb890)
