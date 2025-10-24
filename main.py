@@ -1,6 +1,7 @@
 import os
 import time
 import argparse
+import matplotlib.pyplot as plt
 from wordcounter.extractor import extract_text_from_pdfs
 from wordcounter.processor import process_text
 from wordcounter.exporter import export_to_excel, create_scatter_plot
@@ -35,8 +36,10 @@ def main(args):
     print(f"Generating plot for the top {args.top_n} words...")
     top_words_df = word_counts_df.head(args.top_n)
     
-    plt_style = 'https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle'
-    create_scatter_plot(top_words_df, f'Top {args.top_n} Most Frequent Words', style=plt_style)
+    fig = create_scatter_plot(top_words_df, f'Top {args.top_n} Most Frequent Words')
+
+    print("Displaying plot. Close the plot window to exit.")
+    plt.show()
 
     print(f'\nDone! Total time: {time.time() - time1:.2f}s')
 

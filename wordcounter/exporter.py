@@ -9,19 +9,22 @@ def export_to_excel(dataframe, filename):
         
     dataframe.to_excel(filename, index=False)
 
-def create_scatter_plot(data, title, style=None):
-    if style:
-        try:
-            plt.style.use(style)
-        except:
-            print(f"Warning: Could not load style '{style}'. Using default.")
+def create_scatter_plot(data, title, style='dark_background'):
+    try:
+        plt.style.use(style) 
+    except:
+        print(f"Warning: Could not load style '{style}'. Using default.")
+        plt.style.use('default') 
 
-    plt.figure(figsize=(17, 6))
-    plt.plot(range(len(data)), data['Frequency'], marker='o', linestyle=':', markersize=6, label='Frequency')
-    plt.xticks(range(len(data)), data['Words'], rotation=90, fontsize=8)
-    plt.title(title)
-    plt.xlabel('Words')
-    plt.ylabel('Frequency')
-    plt.legend()
+    fig, ax = plt.subplots(figsize=(17, 6))
+    
+    ax.plot(range(len(data)), data['Frequency'], marker='o', linestyle=':', markersize=6, label='Frequency')
+    ax.set_xticks(range(len(data)))
+    ax.set_xticklabels(data['Words'], rotation=90, fontsize=8)
+    ax.set_title(title)
+    ax.set_xlabel('Words')
+    ax.set_ylabel('Frequency')
+    ax.legend()
     plt.tight_layout()
-    plt.show()
+    
+    return fig
